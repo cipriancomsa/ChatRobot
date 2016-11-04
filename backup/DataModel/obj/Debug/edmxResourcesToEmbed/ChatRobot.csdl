@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="dialog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="from" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="session_id" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <Property Name="conversation_time" Type="DateTime" Precision="3" />
+    <Property Name="to" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="dialog_base">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="response" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="active" Type="Byte" />
+  </EntityType>
+  <EntityContainer Name="ChatEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="dialogs" EntityType="Self.dialog" />
+    <EntitySet Name="dialog_base" EntityType="Self.dialog_base" />
+  </EntityContainer>
+</Schema>

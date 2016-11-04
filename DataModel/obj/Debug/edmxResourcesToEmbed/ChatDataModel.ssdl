@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Chat.dbo.BadWords' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="BadWords">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="word" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Dialog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="from" Type="nchar" MaxLength="10" />
+    <Property Name="to" Type="nchar" MaxLength="10" />
+    <Property Name="dialog" Type="nvarchar" MaxLength="200" />
+    <Property Name="session_id" Type="nchar" MaxLength="200" />
+    <Property Name="conversation_time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DialogBase">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject" Type="nvarchar(max)" />
+    <Property Name="response" Type="nvarchar(max)" />
+    <Property Name="active" Type="tinyint" />
+  </EntityType>
+  <EntityContainer Name="ChatModelStoreContainer">
+    <EntitySet Name="Dialog" EntityType="Self.Dialog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DialogBase" EntityType="Self.DialogBase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BadWords" EntityType="Self.BadWords" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [BadWords].[id] AS [id], 
+    [BadWords].[word] AS [word]
+    FROM [dbo].[BadWords] AS [BadWords]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

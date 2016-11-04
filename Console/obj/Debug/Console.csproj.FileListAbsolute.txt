@@ -1,0 +1,2 @@
+D:\proiecte\ChatRobot\ChatRobot\Console\obj\Debug\Console.csprojResolveAssemblyReference.cache
+D:\proiecte\ChatRobot\ChatRobot\Console\obj\Debug\Console.csproj.Console.exe.config

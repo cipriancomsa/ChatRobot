@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AdsPriceAnalyticsModelStoreContainer" CdmEntityContainer="kpa">
+    <EntitySetMapping Name="TaskJobs">
+      <EntityTypeMapping TypeName="IsTypeOf(AdsPriceAnalyticsModel.TaskJob)">
+        <MappingFragment StoreEntitySet="TaskJobs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TaskStatusId" ColumnName="TaskStatusId" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
+          <ScalarProperty Name="TaskTypeId" ColumnName="TaskTypeId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="ParentTask" ColumnName="ParentTask" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(AdsPriceAnalyticsModel.TaskStatu)">
+        <MappingFragment StoreEntitySet="TaskStatus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(AdsPriceAnalyticsModel.TaskType)">
+        <MappingFragment StoreEntitySet="TaskTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaskWebsiteLogs">
+      <EntityTypeMapping TypeName="IsTypeOf(AdsPriceAnalyticsModel.TaskWebsiteLog)">
+        <MappingFragment StoreEntitySet="TaskWebsiteLogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Log" ColumnName="Log" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Websites">
+      <EntityTypeMapping TypeName="IsTypeOf(AdsPriceAnalyticsModel.Website)">
+        <MappingFragment StoreEntitySet="Websites">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LastScannedDate" ColumnName="LastScannedDate" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="SleepSecondsBetweenCalls" ColumnName="SleepSecondsBetweenCalls" />
+          <ScalarProperty Name="AdsDetectorRules" ColumnName="AdsDetectorRules" />
+          <ScalarProperty Name="PriceXPath" ColumnName="PriceXPath" />
+          <ScalarProperty Name="CurrencyXPath" ColumnName="CurrencyXPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ads">
+      <EntityTypeMapping TypeName="IsTypeOf(AdsPriceAnalyticsModel.Ad)">
+        <MappingFragment StoreEntitySet="Ads">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="WebsiteId" ColumnName="WebsiteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

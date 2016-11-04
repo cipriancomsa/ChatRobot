@@ -1,0 +1,17 @@
+D:\proiecte\ChatRobot\ChatRobot\bin\Debug\ChatRobot.exe.config
+D:\proiecte\ChatRobot\ChatRobot\obj\Debug\ChatRobot.csprojResolveAssemblyReference.cache
+c:\inetpub\wwwroot\ChatRobot\ChatRobot\bin\Debug\ChatRobot.exe.config
+c:\inetpub\wwwroot\ChatRobot\ChatRobot\obj\Debug\ChatRobot.csprojResolveAssemblyReference.cache
+c:\inetpub\wwwroot\ChatRobot\ChatRobot\bin\Debug\ChatRobot.exe
+c:\inetpub\wwwroot\ChatRobot\ChatRobot\bin\Debug\ChatRobot.pdb
+c:\inetpub\wwwroot\ChatRobot\ChatRobot\obj\Debug\ChatRobot.exe
+c:\inetpub\wwwroot\ChatRobot\ChatRobot\obj\Debug\ChatRobot.pdb
+d:\proiecte\ChatRobot\ChatRobot\ChatRobot\bin\Debug\ChatRobot.exe.config
+d:\proiecte\ChatRobot\ChatRobot\ChatRobot\obj\Debug\ChatRobot.exe
+d:\proiecte\ChatRobot\ChatRobot\ChatRobot\obj\Debug\ChatRobot.pdb
+d:\proiecte\ChatRobot\ChatRobot\ChatRobot\obj\Debug\ChatRobot.csprojResolveAssemblyReference.cache
+d:\proiecte\ChatRobot\ChatRobot\ChatRobot\bin\Debug\ChatRobot.exe
+d:\proiecte\ChatRobot\ChatRobot\ChatRobot\bin\Debug\ChatRobot.pdb
+d:\proiecte\ChatRobot\ChatRobot\backup\ChatRobot\bin\Debug\ChatRobot.exe.config
+d:\proiecte\ChatRobot\ChatRobot\backup\ChatRobot\obj\Debug\ChatRobot.exe
+d:\proiecte\ChatRobot\ChatRobot\backup\ChatRobot\obj\Debug\ChatRobot.pdb

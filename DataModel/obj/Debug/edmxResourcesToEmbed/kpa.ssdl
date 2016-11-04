@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdsPriceAnalyticsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AdsPriceAnalyticsModelStoreContainer">
+    <EntitySet Name="TaskJobs" EntityType="AdsPriceAnalyticsModel.Store.TaskJobs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskStatus" EntityType="AdsPriceAnalyticsModel.Store.TaskStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskTypes" EntityType="AdsPriceAnalyticsModel.Store.TaskTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TaskWebsiteLogs" EntityType="AdsPriceAnalyticsModel.Store.TaskWebsiteLogs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Websites" EntityType="AdsPriceAnalyticsModel.Store.Websites" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ads" EntityType="AdsPriceAnalyticsModel.Store.Ads" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AccountTask" Association="AdsPriceAnalyticsModel.Store.FK_AccountTask">
+      <End Role="Website" EntitySet="Websites" />
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskStatusTask" Association="AdsPriceAnalyticsModel.Store.FK_TaskStatusTask">
+      <End Role="TaskStatus" EntitySet="TaskStatus" />
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTaskAccountLogs" Association="AdsPriceAnalyticsModel.Store.FK_TaskTaskAccountLogs">
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+      <End Role="TaskWebsiteLog" EntitySet="TaskWebsiteLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTypeTask" Association="AdsPriceAnalyticsModel.Store.FK_TaskTypeTask">
+      <End Role="TaskType" EntitySet="TaskTypes" />
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountTaskAccountLogs" Association="AdsPriceAnalyticsModel.Store.FK_AccountTaskAccountLogs">
+      <End Role="Website" EntitySet="Websites" />
+      <End Role="TaskWebsiteLog" EntitySet="TaskWebsiteLogs" />
+    </AssociationSet>
+    <AssociationSet Name="WebsiteAd" Association="AdsPriceAnalyticsModel.Store.WebsiteAd">
+      <End Role="Website" EntitySet="Websites" />
+      <End Role="Ad" EntitySet="Ads" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TaskJobs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaskStatusId" Type="int" Nullable="false" />
+    <Property Name="Job" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TaskTypeId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="ParentTask" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TaskStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TaskWebsiteLogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="TaskId" Type="int" Nullable="false" />
+    <Property Name="ActionDate" Type="datetime" Nullable="false" />
+    <Property Name="Action" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Log" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Websites">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LastScannedDate" Type="datetime" Nullable="false" />
+    <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SleepSecondsBetweenCalls" Type="smallint" Nullable="true" />
+    <Property Name="AdsDetectorRules" Type="nchar" Nullable="true" MaxLength="255" />
+    <Property Name="PriceXPath" Type="nchar" Nullable="true" MaxLength="300" />
+    <Property Name="CurrencyXPath" Type="nchar" Nullable="true" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Ads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nchar" Nullable="true" MaxLength="400" />
+    <Property Name="Url" Type="nchar" Nullable="true" MaxLength="400" />
+    <Property Name="Price" Type="real" Nullable="true" />
+    <Property Name="Currency" Type="nchar" Nullable="true" MaxLength="10" />
+    <Property Name="WebsiteId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccountTask">
+    <End Role="Website" Type="AdsPriceAnalyticsModel.Store.Websites" Multiplicity="1" />
+    <End Role="TaskJob" Type="AdsPriceAnalyticsModel.Store.TaskJobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskJob">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskStatusTask">
+    <End Role="TaskStatus" Type="AdsPriceAnalyticsModel.Store.TaskStatus" Multiplicity="1" />
+    <End Role="TaskJob" Type="AdsPriceAnalyticsModel.Store.TaskJobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskJob">
+        <PropertyRef Name="TaskStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTaskAccountLogs">
+    <End Role="TaskJob" Type="AdsPriceAnalyticsModel.Store.TaskJobs" Multiplicity="1" />
+    <End Role="TaskWebsiteLog" Type="AdsPriceAnalyticsModel.Store.TaskWebsiteLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskJob">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskWebsiteLog">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTypeTask">
+    <End Role="TaskType" Type="AdsPriceAnalyticsModel.Store.TaskTypes" Multiplicity="1" />
+    <End Role="TaskJob" Type="AdsPriceAnalyticsModel.Store.TaskJobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskJob">
+        <PropertyRef Name="TaskTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountTaskAccountLogs">
+    <End Role="Website" Type="AdsPriceAnalyticsModel.Store.Websites" Multiplicity="1" />
+    <End Role="TaskWebsiteLog" Type="AdsPriceAnalyticsModel.Store.TaskWebsiteLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskWebsiteLog">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WebsiteAd">
+    <End Role="Website" Type="AdsPriceAnalyticsModel.Store.Websites" Multiplicity="1" />
+    <End Role="Ad" Type="AdsPriceAnalyticsModel.Store.Ads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="WebsiteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

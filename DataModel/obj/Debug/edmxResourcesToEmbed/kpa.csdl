@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdsPriceAnalyticsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TaskJob">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TaskStatusId" Type="Int32" Nullable="false" />
+    <Property Name="Job" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TaskTypeId" Type="Int32" Nullable="false" />
+    <Property Name="AccountId" Type="Int32" Nullable="false" />
+    <Property Name="ParentTask" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Website" Relationship="Self.FK_AccountTask" FromRole="TaskJob" ToRole="Website" />
+    <NavigationProperty Name="TaskStatu" Relationship="Self.FK_TaskStatusTask" FromRole="TaskJob" ToRole="TaskStatus" />
+    <NavigationProperty Name="TaskWebsiteLogs" Relationship="Self.FK_TaskTaskAccountLogs" FromRole="TaskJob" ToRole="TaskWebsiteLog" />
+    <NavigationProperty Name="TaskType" Relationship="Self.FK_TaskTypeTask" FromRole="TaskJob" ToRole="TaskType" />
+  </EntityType>
+  <EntityType Name="TaskStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TaskJobs" Relationship="Self.FK_TaskStatusTask" FromRole="TaskStatus" ToRole="TaskJob" />
+  </EntityType>
+  <EntityType Name="TaskType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TaskJobs" Relationship="Self.FK_TaskTypeTask" FromRole="TaskType" ToRole="TaskJob" />
+  </EntityType>
+  <EntityType Name="TaskWebsiteLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountId" Type="Int32" Nullable="false" />
+    <Property Name="TaskId" Type="Int32" Nullable="false" />
+    <Property Name="ActionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Action" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Log" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TaskJob" Relationship="Self.FK_TaskTaskAccountLogs" FromRole="TaskWebsiteLog" ToRole="TaskJob" />
+    <NavigationProperty Name="Website" Relationship="Self.FK_AccountTaskAccountLogs" FromRole="TaskWebsiteLog" ToRole="Website" />
+  </EntityType>
+  <EntityType Name="Website">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LastScannedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SleepSecondsBetweenCalls" Type="Int16" />
+    <Property Name="AdsDetectorRules" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+    <Property Name="PriceXPath" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+    <Property Name="CurrencyXPath" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="TaskJobs" Relationship="Self.FK_AccountTask" FromRole="Website" ToRole="TaskJob" />
+    <NavigationProperty Name="TaskWebsiteLogs" Relationship="Self.FK_AccountTaskAccountLogs" FromRole="Website" ToRole="TaskWebsiteLog" />
+    <NavigationProperty Name="Ads" Relationship="AdsPriceAnalyticsModel.WebsiteAd" FromRole="Website" ToRole="Ad" />
+  </EntityType>
+  <EntityType Name="Ad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="400" Unicode="true" FixedLength="true" />
+    <Property Name="Url" Type="String" MaxLength="400" FixedLength="true" Unicode="true" />
+    <Property Name="Price" Type="Single" />
+    <Property Name="Currency" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Website" Relationship="AdsPriceAnalyticsModel.WebsiteAd" FromRole="Ad" ToRole="Website" />
+    <Property Name="WebsiteId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccountTask">
+    <End Role="Website" Type="Self.Website" Multiplicity="1" />
+    <End Role="TaskJob" Type="Self.TaskJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskJob">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskStatusTask">
+    <End Role="TaskStatus" Type="Self.TaskStatu" Multiplicity="1" />
+    <End Role="TaskJob" Type="Self.TaskJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskJob">
+        <PropertyRef Name="TaskStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTaskAccountLogs">
+    <End Role="TaskJob" Type="Self.TaskJob" Multiplicity="1" />
+    <End Role="TaskWebsiteLog" Type="Self.TaskWebsiteLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskJob">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskWebsiteLog">
+        <PropertyRef Name="TaskId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TaskTypeTask">
+    <End Role="TaskType" Type="Self.TaskType" Multiplicity="1" />
+    <End Role="TaskJob" Type="Self.TaskJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaskType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskJob">
+        <PropertyRef Name="TaskTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountTaskAccountLogs">
+    <End Role="Website" Type="Self.Website" Multiplicity="1" />
+    <End Role="TaskWebsiteLog" Type="Self.TaskWebsiteLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TaskWebsiteLog">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="kpa" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TaskJobs" EntityType="Self.TaskJob" />
+    <EntitySet Name="TaskStatus" EntityType="Self.TaskStatu" />
+    <EntitySet Name="TaskTypes" EntityType="Self.TaskType" />
+    <EntitySet Name="TaskWebsiteLogs" EntityType="Self.TaskWebsiteLog" />
+    <EntitySet Name="Websites" EntityType="Self.Website" />
+    <EntitySet Name="Ads" EntityType="Self.Ad" />
+    <AssociationSet Name="FK_AccountTask" Association="Self.FK_AccountTask">
+      <End Role="Website" EntitySet="Websites" />
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskStatusTask" Association="Self.FK_TaskStatusTask">
+      <End Role="TaskStatus" EntitySet="TaskStatus" />
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTaskAccountLogs" Association="Self.FK_TaskTaskAccountLogs">
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+      <End Role="TaskWebsiteLog" EntitySet="TaskWebsiteLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TaskTypeTask" Association="Self.FK_TaskTypeTask">
+      <End Role="TaskType" EntitySet="TaskTypes" />
+      <End Role="TaskJob" EntitySet="TaskJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountTaskAccountLogs" Association="Self.FK_AccountTaskAccountLogs">
+      <End Role="Website" EntitySet="Websites" />
+      <End Role="TaskWebsiteLog" EntitySet="TaskWebsiteLogs" />
+    </AssociationSet>
+    <AssociationSet Name="WebsiteAd" Association="AdsPriceAnalyticsModel.WebsiteAd">
+      <End Role="Website" EntitySet="Websites" />
+      <End Role="Ad" EntitySet="Ads" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="WebsiteAd">
+    <End Type="AdsPriceAnalyticsModel.Website" Role="Website" Multiplicity="1" />
+    <End Type="AdsPriceAnalyticsModel.Ad" Role="Ad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="WebsiteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

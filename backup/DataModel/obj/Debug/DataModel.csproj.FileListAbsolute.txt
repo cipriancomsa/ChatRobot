@@ -1,0 +1,16 @@
+d:\proiecte\kpa\Infrastucture\DataModel\bin\Debug\DataModel.dll.config
+d:\proiecte\kpa\Infrastucture\DataModel\bin\Debug\DataModel.dll
+d:\proiecte\kpa\Infrastucture\DataModel\bin\Debug\DataModel.pdb
+d:\proiecte\kpa\Infrastucture\DataModel\bin\Debug\EntityFramework.dll
+d:\proiecte\kpa\Infrastucture\DataModel\bin\Debug\EntityFramework.SqlServer.dll
+d:\proiecte\kpa\Infrastucture\DataModel\bin\Debug\EntityFramework.xml
+d:\proiecte\kpa\Infrastucture\DataModel\bin\Debug\EntityFramework.SqlServer.xml
+d:\proiecte\kpa\Infrastucture\DataModel\obj\Debug\DataModel.csprojResolveAssemblyReference.cache
+d:\proiecte\kpa\Infrastucture\DataModel\obj\Debug\DataModel.dll
+d:\proiecte\kpa\Infrastucture\DataModel\obj\Debug\DataModel.pdb
+D:\proiecte\ChatRobot\ChatRobot\DataModel\bin\Debug\DataModel.dll.config
+D:\proiecte\ChatRobot\ChatRobot\DataModel\bin\Debug\DataModel.dll
+D:\proiecte\ChatRobot\ChatRobot\DataModel\bin\Debug\DataModel.pdb
+D:\proiecte\ChatRobot\ChatRobot\DataModel\obj\Debug\DataModel.csprojResolveAssemblyReference.cache
+D:\proiecte\ChatRobot\ChatRobot\DataModel\obj\Debug\DataModel.dll
+D:\proiecte\ChatRobot\ChatRobot\DataModel\obj\Debug\DataModel.pdb

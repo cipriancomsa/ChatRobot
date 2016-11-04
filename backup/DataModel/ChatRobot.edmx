@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ChatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Chat.dbo.dialog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dialog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="from" Type="nchar" MaxLength="10" />
+          <Property Name="to" Type="nchar" MaxLength="10" />
+          <Property Name="dialog" Type="nvarchar" MaxLength="200" />
+          <Property Name="session_id" Type="nchar" MaxLength="200" />
+          <Property Name="conversation_time" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Chat.dbo.dialog_base' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dialog_base">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subject" Type="nvarchar(max)" />
+          <Property Name="response" Type="nvarchar(max)" />
+          <Property Name="active" Type="tinyint" />
+        </EntityType>
+        <EntityContainer Name="ChatModelStoreContainer">
+          <EntitySet Name="dialog" EntityType="Self.dialog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dialog].[id] AS [id], 
+    [dialog].[from] AS [from], 
+    [dialog].[to] AS [to], 
+    [dialog].[dialog] AS [dialog], 
+    [dialog].[session_id] AS [session_id], 
+    [dialog].[conversation_time] AS [conversation_time]
+    FROM [dbo].[dialog] AS [dialog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="dialog_base" EntityType="Self.dialog_base" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dialog_base].[id] AS [id], 
+    [dialog_base].[subject] AS [subject], 
+    [dialog_base].[response] AS [response], 
+    [dialog_base].[active] AS [active]
+    FROM [dbo].[dialog_base] AS [dialog_base]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dialog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="from" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="session_id" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="conversation_time" Type="DateTime" Precision="3" />
+          <Property Name="to" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dialog_base">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="response" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Byte" />
+        </EntityType>
+        <EntityContainer Name="ChatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dialogs" EntityType="Self.dialog" />
+          <EntitySet Name="dialog_base" EntityType="Self.dialog_base" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChatModelStoreContainer" CdmEntityContainer="ChatEntities">
+          <EntitySetMapping Name="dialogs">
+            <EntityTypeMapping TypeName="ChatModel.dialog">
+              <MappingFragment StoreEntitySet="dialog">
+                <ScalarProperty Name="to" ColumnName="to" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="from" ColumnName="from" />
+                <ScalarProperty Name="session_id" ColumnName="session_id" />
+                <ScalarProperty Name="conversation_time" ColumnName="conversation_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dialog_base">
+            <EntityTypeMapping TypeName="ChatModel.dialog_base">
+              <MappingFragment StoreEntitySet="dialog_base">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="response" ColumnName="response" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

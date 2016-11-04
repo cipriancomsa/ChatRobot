@@ -1,0 +1,9 @@
+d:\proiecte\kpa\Infrastucture\Utils\bin\Debug\Utils.dll
+d:\proiecte\kpa\Infrastucture\Utils\bin\Debug\Utils.pdb
+d:\proiecte\kpa\Infrastucture\Utils\obj\Debug\Utils.dll
+d:\proiecte\kpa\Infrastucture\Utils\obj\Debug\Utils.pdb
+D:\proiecte\ChatRobot\ChatRobot\Utils\bin\Debug\Utils.dll
+D:\proiecte\ChatRobot\ChatRobot\Utils\bin\Debug\Utils.pdb
+D:\proiecte\ChatRobot\ChatRobot\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
+D:\proiecte\ChatRobot\ChatRobot\Utils\obj\Debug\Utils.dll
+D:\proiecte\ChatRobot\ChatRobot\Utils\obj\Debug\Utils.pdb

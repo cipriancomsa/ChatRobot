@@ -1,0 +1,12 @@
+d:\proiecte\kpa\Infrastucture\Utils\bin\Debug\Utils.dll
+d:\proiecte\kpa\Infrastucture\Utils\bin\Debug\Utils.pdb
+d:\proiecte\kpa\Infrastucture\Utils\obj\Debug\Utils.dll
+d:\proiecte\kpa\Infrastucture\Utils\obj\Debug\Utils.pdb
+d:\proiecte\ChatRobot\ChatRobot\Utils\bin\Debug\Utils.dll
+d:\proiecte\ChatRobot\ChatRobot\Utils\bin\Debug\Utils.pdb
+d:\proiecte\ChatRobot\ChatRobot\Utils\obj\Debug\Utils.dll
+d:\proiecte\ChatRobot\ChatRobot\Utils\obj\Debug\Utils.pdb
+d:\proiecte\ChatRobot\ChatRobot\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
+c:\inetpub\wwwroot\ChatRobot\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
+c:\inetpub\wwwroot\ChatRobot\Utils\obj\Debug\Utils.dll
+c:\inetpub\wwwroot\ChatRobot\Utils\obj\Debug\Utils.pdb

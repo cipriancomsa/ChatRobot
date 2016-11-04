@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Chat.dbo.dialog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="dialog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="from" Type="nchar" MaxLength="10" />
+    <Property Name="to" Type="nchar" MaxLength="10" />
+    <Property Name="dialog" Type="nvarchar" MaxLength="200" />
+    <Property Name="session_id" Type="nchar" MaxLength="200" />
+    <Property Name="conversation_time" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Chat.dbo.dialog_base' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="dialog_base">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject" Type="nvarchar(max)" />
+    <Property Name="response" Type="nvarchar(max)" />
+    <Property Name="active" Type="tinyint" />
+  </EntityType>
+  <EntityContainer Name="ChatModelStoreContainer">
+    <EntitySet Name="dialog" EntityType="Self.dialog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [dialog].[id] AS [id], 
+    [dialog].[from] AS [from], 
+    [dialog].[to] AS [to], 
+    [dialog].[dialog] AS [dialog], 
+    [dialog].[session_id] AS [session_id], 
+    [dialog].[conversation_time] AS [conversation_time]
+    FROM [dbo].[dialog] AS [dialog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="dialog_base" EntityType="Self.dialog_base" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [dialog_base].[id] AS [id], 
+    [dialog_base].[subject] AS [subject], 
+    [dialog_base].[response] AS [response], 
+    [dialog_base].[active] AS [active]
+    FROM [dbo].[dialog_base] AS [dialog_base]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
